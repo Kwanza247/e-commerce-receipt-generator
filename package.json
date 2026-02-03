@@ -1,0 +1,28 @@
+{
+  "name": "e-commerce-receipt-generator",
+  "version": "1.0.0",
+  "description": "this is an email receipt generator app, that sends email containing receiept to customers, immediately a payment for an order is made",
+  "license": "MIT",
+  "author": "ibrahim adegboye",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "worker": "node workers/receiptWorker.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bullmq": "^5.67.2",
+    "cloudinary": "^2.9.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "ioredis": "^5.9.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.1.5",
+    "nodemailer": "^7.0.12",
+    "nodemon": "^3.1.11",
+    "pdfkit": "^0.17.2",
+    "streamifier": "^0.1.1"
+  }
+}
