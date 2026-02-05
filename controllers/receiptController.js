@@ -2,6 +2,7 @@ const { generateReceipt } = require("../services/receiptGenerator");
 const Receipt = require("../models/receiptModel");
 const Order = require("../models/orderModel");
 const { sendReceiptEmail } = require("../services/emailService");
+const cloudinary = require("../config/cloudinary")
 
 exports.generateAndSendReceipt = async (orderId) => {
   try {
