@@ -58,9 +58,10 @@ exports.generateAndSendReceipt = async (orderId) => {
 };
 
 
+
 exports.getReceiptByOrderId = async (req, res) => {
   try {
-    const { orderId } = req.params;
+    const { orderId } = req.params.id;
 
     const receipt = await Receipt.findOne({ orderId });
     if (!receipt) {
@@ -79,7 +80,7 @@ exports.getReceiptByOrderId = async (req, res) => {
       receiptId: receipt.receiptId,
       orderId: receipt.orderId,
       customerEmail: receipt.customerEmail,
-      receiptUrl: receipt.receiptUrl,
+      receiptUrl: signedUrl,
       createdAt: receipt.createdAt,
     });
   } catch (error) {
