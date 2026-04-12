@@ -1,31 +1,29 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  secure: false, 
-  auth: {
-    user: process.env.EMAIL_USER, // MY Gmail
-    pass: process.env.EMAIL_PASS, // Gmail App Password
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 exports.sendReceiptEmail = async (receipt, pdfBuffer) => {
-  await transporter.sendMail({
-    from: process.env.EMAIL_FROM,
-    to: receipt.customerEmail,
-    subject: `Your Receipt – Order ${receipt.orderId}`,
-    text: `Hello ${receipt.customerName},
-
-Thank you for your order.
-Your receipt is attached as a PDF.
-`,
-    attachments: [
-      {
-        filename: `receipt-${receipt.orderId}.pdf`,
-        content: pdfBuffer,
-        contentType: "application/pdf",
-      },
-    ],
-  });
+  try {
+    await resend.emails.send({
+      from: process.env.EMAIL_FROM,
+      to: receipt.email,
+      subject: `Your Receipt for Order ${receipt.orderId}`,
+      text: `Hello ${receipt.customerName},
+      
+      \n\nThank you for your order. Please find your receipt attached.
+      \n\nBest regards,\nThe Hides Luxury Team`,
+      attachments: [
+        {
+          filename: `receipt-${receipt.orderId}.pdf`,
+          content: pdfBuffer,
+          contentType: "application/pdf",
+        },
+      ],
+    });
+    console.log(" Receipt email sent to:", receipt.email);
+  }catch (err) {
+    console.error("Errror sending receipt email:", err);
+    throw err;
+  }
 };
+console.log("Resend API Key>> ", process.env.RESEND_API_KEY);

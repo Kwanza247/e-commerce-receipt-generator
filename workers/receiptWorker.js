@@ -1,10 +1,11 @@
+require("dotenv").config();
 const { Worker } = require("bullmq");
 const redisConnection = require("../config/redis");
 const Order = require("../models/orderModel");
 const Receipt = require("../models/receiptModel");
 const { generateReceipt } = require("../services/receiptGenerator");
 const { sendReceiptEmail } = require("../services/emailService");
-require("dotenv").config();
+
 
 // Worker for processing receipt jobs
 const receiptWorker = new Worker(
