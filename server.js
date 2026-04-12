@@ -1,6 +1,8 @@
 const dotenv = require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose');
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./config/swagger");
 
 
 const connectDb = require('./config/dbConnection');
@@ -16,6 +18,8 @@ process.on('unhandledRejection', (reason, promise) => {
 
 const app = express();
 app.use(express.json());
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const port = process.env.PORT || 4000;
 console.log(process.env.CONNECTION_STRING);

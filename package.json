@@ -24,6 +24,8 @@
     "nodemon": "^3.1.11",
     "pdfkit": "^0.17.2",
     "resend": "^6.9.2",
-    "streamifier": "^0.1.1"
+    "streamifier": "^0.1.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   }
 }
